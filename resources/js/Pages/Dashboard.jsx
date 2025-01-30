@@ -15,7 +15,6 @@ export default function Dashboard({ auth }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                         <h1 className="text-gray-900 text-lg">Welcome, {auth.user.name}!</h1>
-                        <p className="mt-4 text-gray-600">Here are your stats:</p>
                     </div>
 
                     <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
