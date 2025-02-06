@@ -35,6 +35,16 @@ export default function Authenticated({ user, header, children }) {
                                     Chatbot
                                 </NavLink>
                             </div>
+                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink href={route('doctores.find.doctor')} active={route().current('doctores.find.doctor')}>
+                                    FindDoctores
+                                </NavLink>
+                            </div>
+                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink href={route('home.homepage')} active={route().current('home.homepage')}>
+                                    Home
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ms-6">
