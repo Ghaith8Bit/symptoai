@@ -31,7 +31,7 @@ export default function Authenticated({ user, header, children }) {
                                 </NavLink>
                             </div>
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink >
+                                <NavLink href={route('chat.chatbot')} active={route().current('chat.chatbot')}>
                                     Chatbot
                                 </NavLink>
                             </div>
@@ -43,6 +43,11 @@ export default function Authenticated({ user, header, children }) {
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href={route('home.homepage')} active={route().current('home.homepage')}>
                                     Home
+                                </NavLink>
+                            </div>
+                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink href={route('expert.expertsystem')} active={route().current('expert.expertsystem')}>
+                                    Expert
                                 </NavLink>
                             </div>
                         </div>

@@ -32,6 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/chatbot', fn() => Inertia::render('Chat/Chatbot'))->name('chat.chatbot');
     Route::get('/find-doctor', fn() => Inertia::render('Doctores/FindDoctor'))->name('doctores.find.doctor');
     Route::get('/homepage', fn() => Inertia::render('Home/Homepage'))->name('home.homepage');
+    Route::get('/expertsystem', fn() => Inertia::render('Expert/ExpertSystem'))->name('expert.expertsystem');
 });
 
 
