@@ -30,7 +30,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', fn() => Inertia::render('Dashboard'))->name('dashboard');
     Route::get('/medical-record', fn() => Inertia::render('Medical/Record'))->name('medical.record');
     Route::get('/chatbot', fn() => Inertia::render('Chat/Chatbot'))->name('chat.chatbot');
-    Route::get('/find-doctor', fn() => Inertia::render('Doctores/FindDoctor'))->name('doctores.find.doctor');
+    Route::get('/find-doctor', fn() => Inertia::render('Doctors/FindDoctor'))->name('doctors.find.doctor');
     Route::get('/homepage', fn() => Inertia::render('Home/Homepage'))->name('home.homepage');
     Route::get('/expertsystem', fn() => Inertia::render('Expert/ExpertSystem'))->name('expert.expertsystem');
 });
