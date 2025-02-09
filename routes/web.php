@@ -26,12 +26,12 @@ Route::get('/', function () {
 });
 
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', fn() => Inertia::render('Dashboard'))->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/dashboard')->name('dashboard')->middleware('role.redirect');
+
     Route::get('/medical-record', fn() => Inertia::render('Medical/Record'))->name('medical.record');
-    Route::get('/chatbot', fn() => Inertia::render('Chat/Chatbot'))->name('chat.chatbot');
+    Route::get('/chatbot', fn() => Inertia::render('AI/Diagnosis'))->name('ai.diagnosis');
     Route::get('/find-doctor', fn() => Inertia::render('Doctors/FindDoctor'))->name('doctors.find.doctor');
-    Route::get('/homepage', fn() => Inertia::render('Home/Homepage'))->name('home.homepage');
     Route::get('/expertsystem', fn() => Inertia::render('Expert/ExpertSystem'))->name('expert.expertsystem');
 });
 
