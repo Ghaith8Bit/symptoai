@@ -21,7 +21,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             <Link href="/" className="flex items-center space-x-2">
                                 <HeartIcon className="h-8 w-8 text-red-500 animate-pulse" />
                                 <span className="text-2xl font-bold text-gray-800 dark:text-white">
-                                    Dia<span className="text-red-500">Care</span>
+                                    Sympto<span className="text-red-500">Ai</span>
                                 </span>
                             </Link>
 
