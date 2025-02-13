@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -19,8 +20,6 @@ use Inertia\Inertia;
 */
 
 Route::get('/', HomeController::class);
-Route::post('/contact', ContactController::class)->middleware('throttle:3,1');
-
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard')->name('dashboard')->middleware('role.redirect');
@@ -29,7 +28,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/chatbot', fn() => Inertia::render('AI/Diagnosis'))->name('ai.diagnosis');
     Route::get('/find-doctor', fn() => Inertia::render('Doctors/FindDoctor'))->name('doctors.find.doctor');
     Route::get('/expertsystem', fn() => Inertia::render('Expert/ExpertSystem'))->name('expert.expertsystem');
-    Route::get('/blogs', fn() => Inertia::render('Blogs'))->name('blogs');
 });
 
 
@@ -38,5 +36,27 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::group(
+    [
+        'prefix' => 'contact',
+        'as' => 'contact.',
+        'controller' => ContactController::class
+    ],
+    function () {
+        Route::post('/contact', 'send')->name('send')->middleware('throttle:3,1');
+    }
+);
+
+Route::group(
+    [
+        'prefix' => 'blog',
+        'as' => 'blog.',
+        'controller' => BlogController::class
+    ],
+    function () {
+        Route::get('/', 'index')->name('index');
+    }
+);
 
 require __DIR__ . '/auth.php';
