@@ -40,14 +40,19 @@ export default function Authenticated({ user, header, children }) {
                                     Find Doctors
                                 </NavLink>
                             </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            {/* <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href={route('expert.expertsystem')} active={route().current('expert.expertsystem')}>
                                     Expert
                                 </NavLink>
-                            </div>
+                            </div> */}
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href={route('Contact.ContactUs')} active={route().current('Contact.ContactUs')}>
                                     Contact
+                                </NavLink>
+                            </div>
+                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink href={route('expert.experttype')} active={route().current('expert.experttype')}>
+                                    Expert
                                 </NavLink>
                             </div>
                         </div>
