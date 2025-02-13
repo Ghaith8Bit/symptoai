@@ -1,3 +1,4 @@
+// resources/js/Components/BlogSection.jsx
 import { useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Keyboard, A11y } from "swiper/modules";
@@ -7,70 +8,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const blogs = [
-    {
-        title: "Living with Diabetes: Daily Management Tips",
-        excerpt:
-            "Discover effective strategies for managing your diabetes through proper monitoring and lifestyle adjustments.",
-        keyPoints: [
-            "Monitor blood sugar levels regularly",
-            "Stay active with moderate exercise",
-            "Follow a balanced, diabetes-friendly diet",
-        ],
-    },
-    {
-        title: "Nutrition Guide for Diabetics",
-        excerpt:
-            "Learn about the best dietary practices and meal planning techniques to maintain healthy blood sugar levels.",
-        keyPoints: [
-            "Best foods for stable blood sugar",
-            "Meal planning tips",
-            "Understanding carbohydrate counting",
-        ],
-    },
-    {
-        title: "Exercise Routines for Diabetes Control",
-        excerpt:
-            "Explore physical activities and exercise plans that help in managing diabetes effectively.",
-        keyPoints: [
-            "Low-impact exercises for beginners",
-            "Strength training benefits",
-            "Importance of consistency in workouts",
-        ],
-    },
-    {
-        title: "Latest Diabetes Research Breakthroughs",
-        excerpt:
-            "Stay updated with the most recent advancements in diabetes treatment and research.",
-        keyPoints: [
-            "New insulin delivery methods",
-            "Promising clinical trials",
-            "Technology in diabetes management",
-        ],
-    },
-    {
-        title: "Mental Health and Diabetes",
-        excerpt:
-            "Understanding the psychological aspects of living with chronic conditions and maintaining mental wellness.",
-        keyPoints: [
-            "Managing stress and anxiety",
-            "Support groups and therapy",
-            "Mindfulness techniques",
-        ],
-    },
-    {
-        title: "Preventing Diabetes Complications",
-        excerpt:
-            "Key steps to avoid long-term complications from diabetes and maintain overall health.",
-        keyPoints: [
-            "Importance of foot care",
-            "Managing cholesterol and blood pressure",
-            "Regular checkups and screenings",
-        ],
-    },
-];
-
-export default function BlogSection() {
+export default function BlogSection({ blogs }) {
+    console.log(blogs);
     const prevRef = useRef(null);
     const nextRef = useRef(null);
     const swiperRef = useRef(null);
@@ -100,21 +39,24 @@ export default function BlogSection() {
                 pagination={{ clickable: true }}
                 className="rounded-3xl shadow-lg bg-white dark:bg-gray-800 p-6"
             >
-                {blogs.map((blog, index) => (
-                    <SwiperSlide key={index}>
-                        <div className="space-y-4 p-10">
-                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                                {blog.title}
-                            </h3>
-                            <p className="text-gray-600 dark:text-gray-300">{blog.excerpt}</p>
-                            <ul className="list-disc pl-5 text-gray-700 dark:text-gray-300">
-                                {blog.keyPoints.map((point, i) => (
-                                    <li key={i}>{point}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    </SwiperSlide>
-                ))}
+                {blogs && blogs.length > 0 ? (
+                    blogs.map((blog, index) => (
+                        <SwiperSlide key={index}>
+                            <div className="space-y-4 p-10">
+                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                                    {blog.title}
+                                </h3>
+                                <p className="text-gray-600 dark:text-gray-300">{blog.body}</p>
+                                <p className="text-gray-800 dark:text-gray-500 text-xs">
+                                    {blog.published_at}
+                                </p>
+                            </div>
+                        </SwiperSlide>
+                    ))
+                ) : (
+                    <p>No blogs available.</p>
+                )}
+
             </Swiper>
 
             {/* Navigation Buttons */}
