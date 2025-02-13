@@ -13,11 +13,11 @@ export default function AboutSection() {
                     data scientists work together to deliver personalized care plans.
                 </p>
                 <div className="mt-8 grid grid-cols-2 gap-4">
-                    <div className="p-4 bg-blue-50 rounded-xl dark:bg-gray-700">
+                    <div className="p-4 bg-blue-50 rounded-xl dark:bg-gray-100">
                         <h3 className="font-bold text-blue-600 dark:text-blue-400">15K+</h3>
                         <p className="text-sm">Patients Helped</p>
                     </div>
-                    <div className="p-4 bg-teal-50 rounded-xl dark:bg-gray-700">
+                    <div className="p-4 bg-teal-50 rounded-xl dark:bg-gray-100">
                         <h3 className="font-bold text-teal-600 dark:text-teal-400">98%</h3>
                         <p className="text-sm">Accuracy Rate</p>
                     </div>
