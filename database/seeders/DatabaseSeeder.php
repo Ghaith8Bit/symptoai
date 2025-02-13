@@ -33,5 +33,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@sympto-ai.com',
             'user_type' => UserType::USER
         ]);
+
+        $this->call(SpecialitiesSeeder::class);
+        $this->call(AccountTypeSeeder::class);
+        $this->call(DoctorsSeeder::class);
     }
 }

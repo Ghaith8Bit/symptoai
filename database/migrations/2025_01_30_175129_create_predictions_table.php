@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->json('symptoms');
             $table->text('result');
-            $table->float('confidence');
             $table->enum('status', ['pending', 'completed', 'failed']);
             $table->timestamps();
         });
