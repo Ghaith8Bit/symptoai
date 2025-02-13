@@ -1,3 +1,5 @@
+import research from "../../../assets/research.jpg"
+
 export default function NewsSection() {
     return (
         <div className="grid md:grid-cols-2 gap-8 animate-fadeIn">
@@ -26,7 +28,7 @@ export default function NewsSection() {
             </div>
             <div className="relative rounded-3xl overflow-hidden shadow-xl">
                 <img
-                    src="/images/medical-research.jpg"
+                    src={research}
                     alt="Research"
                     className="w-full h-full object-cover animate-scaleIn"
                 />

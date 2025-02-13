@@ -1,3 +1,5 @@
+import about from "../../../assets/about.jpg"
+
 export default function AboutSection() {
     return (
         <div className="grid md:grid-cols-2 gap-8 animate-fadeIn">
@@ -23,7 +25,7 @@ export default function AboutSection() {
             </div>
             <div className="relative rounded-3xl overflow-hidden shadow-xl">
                 <img
-                    src="/images/doctor-consultation.jpg"
+                    src={about}
                     alt="Medical Team"
                     className="w-full h-full object-cover animate-scaleIn"
                 />
