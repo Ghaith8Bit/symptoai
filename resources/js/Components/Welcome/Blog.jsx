@@ -1,3 +1,5 @@
+import blog from "../../../assets/research.jpg"
+
 export default function BlogSection() {
     return (
         <div className="grid md:grid-cols-2 gap-8 animate-fadeIn">
@@ -26,7 +28,7 @@ export default function BlogSection() {
             </div>
             <div className="relative rounded-3xl overflow-hidden shadow-xl">
                 <img
-                    src="/images/blog-image.jpg"
+                    src={blog}
                     alt="Blog"
                     className="w-full h-full object-cover animate-scaleIn"
                 />

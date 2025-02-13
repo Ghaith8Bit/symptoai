@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm } from '@inertiajs/react';
 import { PhoneIcon } from "@heroicons/react/24/solid";
 
@@ -7,12 +8,15 @@ export default function ContactSection() {
         email: '',
     });
 
+    const [successMessage, setSuccessMessage] = useState('');
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        setSuccessMessage(''); // Reset success message before submission
         post('/contact', {
             preserveScroll: true,
             onSuccess: () => {
-                // Reset form after successful submission
+                setSuccessMessage('Your message has been sent successfully!');
                 setData({ name: '', email: '' });
             }
         });
@@ -24,6 +28,11 @@ export default function ContactSection() {
                 <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">
                     Contact Our Medical Team
                 </h2>
+                {successMessage && (
+                    <div className="mb-4 p-4 text-green-700 bg-green-100 rounded-lg">
+                        {successMessage}
+                    </div>
+                )}
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
                         <label className="block text-gray-700 dark:text-gray-300 mb-2">
@@ -33,7 +42,7 @@ export default function ContactSection() {
                             type="text"
                             value={data.name}
                             onChange={e => setData('name', e.target.value)}
-                            className="w-full text-gray-300 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600"
+                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600"
                         />
                         {errors.name && <div className="text-red-500 text-sm mt-1">{errors.name}</div>}
                     </div>
@@ -45,7 +54,7 @@ export default function ContactSection() {
                             type="email"
                             value={data.email}
                             onChange={e => setData('email', e.target.value)}
-                            className="w-full text-gray-300 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600"
+                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600"
                         />
                         {errors.email && <div className="text-red-500 text-sm mt-1">{errors.email}</div>}
                     </div>
