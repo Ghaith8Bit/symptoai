@@ -37,5 +37,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SpecialitiesSeeder::class);
         $this->call(AccountTypeSeeder::class);
         $this->call(DoctorsSeeder::class);
+        $this->call(BlogSeeder::class);
     }
 }

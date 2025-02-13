@@ -19,7 +19,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('welcome');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard')->name('dashboard')->middleware('role.redirect');
@@ -44,7 +44,7 @@ Route::group(
         'controller' => ContactController::class
     ],
     function () {
-        Route::post('/contact', 'send')->name('send')->middleware('throttle:3,1');
+        Route::post('/', 'send')->name('send')->middleware('throttle:3,1');
     }
 );
 
@@ -55,7 +55,7 @@ Route::group(
         'controller' => BlogController::class
     ],
     function () {
-        Route::get('/', 'index')->name('index');
+        //
     }
 );
 

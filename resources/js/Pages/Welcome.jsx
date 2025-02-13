@@ -3,11 +3,10 @@ import { Link, Head } from '@inertiajs/react';
 import NavigationTabs from '@/Components/Welcome/NavigationTab';
 import AboutSection from '@/Components/Welcome/About';
 import ContactSection from '@/Components/Welcome/Contact';
-import NewsSection from '@/Components/Welcome/News';
 import BlogSection from '@/Components/Welcome/Blog';
 import { HeartIcon } from '@heroicons/react/24/outline';
 
-export default function Welcome({ auth, laravelVersion, phpVersion }) {
+export default function Welcome({ auth, blogs }) {
     const [activeTab, setActiveTab] = useState('about');
     const [prevTab, setPrevTab] = useState(null);
 
@@ -67,7 +66,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             <div className="transition-all duration-500 ease-in-out">
                                 {activeTab === 'about' && <AboutSection />}
                                 {activeTab === 'contact' && <ContactSection />}
-                                {activeTab === 'blog' && <BlogSection />}
+                                {activeTab === 'blog' && <BlogSection blogs={blogs} />}
                             </div>
                         </div>
                     </div>

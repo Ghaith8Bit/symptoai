@@ -12,8 +12,8 @@ export default function ContactSection() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setSuccessMessage(''); // Reset success message before submission
-        post('/contact', {
+        setSuccessMessage('');
+        post(route('contact.send'), {
             preserveScroll: true,
             onSuccess: () => {
                 setSuccessMessage('Your message has been sent successfully!');

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function __invoke(ContactRequest $request)
+    public function send(ContactRequest $request)
     {
         Contact::create($request->validated());
 
