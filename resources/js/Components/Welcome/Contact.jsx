@@ -1,22 +1,41 @@
+import { useForm } from '@inertiajs/react';
 import { PhoneIcon } from "@heroicons/react/24/solid";
 
-
 export default function ContactSection() {
+    const { data, setData, post, processing, errors } = useForm({
+        name: '',
+        email: '',
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        post('/contact', {
+            preserveScroll: true,
+            onSuccess: () => {
+                // Reset form after successful submission
+                setData({ name: '', email: '' });
+            }
+        });
+    };
+
     return (
         <div className="grid md:grid-cols-2 gap-8 animate-fadeIn">
             <div className="bg-white rounded-3xl p-8 shadow-xl dark:bg-gray-800">
                 <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">
                     Contact Our Medical Team
                 </h2>
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
                         <label className="block text-gray-700 dark:text-gray-300 mb-2">
                             Name
                         </label>
                         <input
                             type="text"
+                            value={data.name}
+                            onChange={e => setData('name', e.target.value)}
                             className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600"
                         />
+                        {errors.name && <div className="text-red-500 text-sm mt-1">{errors.name}</div>}
                     </div>
                     <div>
                         <label className="block text-gray-700 dark:text-gray-300 mb-2">
@@ -24,14 +43,18 @@ export default function ContactSection() {
                         </label>
                         <input
                             type="email"
+                            value={data.email}
+                            onChange={e => setData('email', e.target.value)}
                             className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600"
                         />
+                        {errors.email && <div className="text-red-500 text-sm mt-1">{errors.email}</div>}
                     </div>
                     <button
                         type="submit"
-                        className="w-full bg-teal-500 text-white py-3 rounded-lg hover:bg-teal-600 transition-all duration-300"
+                        disabled={processing}
+                        className="w-full bg-teal-500 text-white py-3 rounded-lg hover:bg-teal-600 transition-all duration-300 disabled:opacity-50"
                     >
-                        Send Message
+                        {processing ? 'Sending...' : 'Send Message'}
                     </button>
                 </form>
             </div>
