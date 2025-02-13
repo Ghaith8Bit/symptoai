@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/react';
 import MedicalPassionStats from '@/Components/MedicalPassionStats';
 import LoginLogsStats from '@/Components/LoginLogsStats';
 import CreateMedicalBlog from '@/Components/Blogs/CreateMedicalBlog';
+import StatisticsTable from '@/Components/StatisticsTable';
 import MedicalBlogList from '@/Components/Blogs/MedicalBlogList';
 
 export default function Dashboard({ auth }) {
@@ -53,6 +54,7 @@ export default function Dashboard({ auth }) {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                         <MedicalPassionStats />
                         <LoginLogsStats />
+                        <StatisticsTable />
                     </div>
 
                     <div className="bg-white shadow-sm sm:rounded-lg p-6 mb-8 border border-teal-100">
