@@ -33,7 +33,7 @@ export default function ContactSection() {
                             type="text"
                             value={data.name}
                             onChange={e => setData('name', e.target.value)}
-                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600"
+                            className="w-full text-gray-300 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600"
                         />
                         {errors.name && <div className="text-red-500 text-sm mt-1">{errors.name}</div>}
                     </div>
@@ -45,7 +45,7 @@ export default function ContactSection() {
                             type="email"
                             value={data.email}
                             onChange={e => setData('email', e.target.value)}
-                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600"
+                            className="w-full text-gray-300 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600"
                         />
                         {errors.email && <div className="text-red-500 text-sm mt-1">{errors.email}</div>}
                     </div>
