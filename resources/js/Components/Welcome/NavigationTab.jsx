@@ -6,7 +6,6 @@ export default function NavigationTabs({ activeTab, handleTabChange }) {
     const tabs = [
         { id: 'about', icon: UserGroupIcon, label: 'About Us' },
         { id: 'contact', icon: PhoneIcon, label: 'Contact' },
-        { id: 'newspaper', icon: NewspaperIcon, label: 'Research' },
         { id: 'blog', icon: BookOpenIcon, label: 'Medical Blog' },
     ];
 

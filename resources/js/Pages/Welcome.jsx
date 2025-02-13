@@ -67,7 +67,6 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             <div className="transition-all duration-500 ease-in-out">
                                 {activeTab === 'about' && <AboutSection />}
                                 {activeTab === 'contact' && <ContactSection />}
-                                {activeTab === 'newspaper' && <NewsSection />}
                                 {activeTab === 'blog' && <BlogSection />}
                             </div>
                         </div>
