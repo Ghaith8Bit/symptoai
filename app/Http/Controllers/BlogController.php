@@ -20,7 +20,11 @@ class BlogController extends Controller
 
     public function store(BlogStoreRequest $request)
     {
-        Blog::create($request->validated());
+        Blog::create([
+            'title' => $request->get('title'),
+            'body' => $request->get('body'),
+            'user_id' => auth()->id(),
+        ]);
 
         return redirect()->back()->with('success', 'Blog created successfully!');
     }
