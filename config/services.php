@@ -31,4 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'doctors_api' => [
+        'url' => env('DOCTORS_API_URL', 'https://w1.doctors.sy/api/account-info/'),
+    ]
+
 ];
