@@ -22,7 +22,6 @@ class BlogFactory extends Factory
         $title = $this->faker->sentence;
         return [
             'title'        => $title,
-            'slug'         => Str::slug($title) . '-' . $this->faker->unique()->numberBetween(1, 10000),
             'body'         => $this->faker->paragraphs(3, true),
             'published_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'user_id'      => User::where('user_type', UserType::EDITOR)->inRandomOrder()->first()->id ?? 1,

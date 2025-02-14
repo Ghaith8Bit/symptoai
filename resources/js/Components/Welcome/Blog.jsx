@@ -9,7 +9,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 export default function BlogSection({ blogs }) {
-    console.log(blogs);
     const prevRef = useRef(null);
     const nextRef = useRef(null);
     const swiperRef = useRef(null);

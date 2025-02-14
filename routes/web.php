@@ -71,7 +71,9 @@ Route::group(
         'controller' => BlogController::class
     ],
     function () {
-        //
+        Route::get('/', 'index')->name('index'); //TODO: Not User Type (Admin)
+        Route::post('/', 'store')->name('store'); //TODO: Not User Type (Admin)
+        Route::delete('/{blog}', 'destroy')->name('destroy'); //TODO: Not User Type (Admin)
     }
 );
 
