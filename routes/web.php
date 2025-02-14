@@ -29,6 +29,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/chatbot', fn() => Inertia::render('AI/Diagnosis'))->name('ai.diagnosis');
     Route::get('/find-doctor', fn() => Inertia::render('Doctors/FindDoctor'))->name('doctors.find.doctor');
     Route::get('/expertsystem', fn() => Inertia::render('Expert/ExpertSystem'))->name('expert.expertsystem');
+    Route::get('/expertType', fn() => Inertia::render('Expert/ExpertType'))->name('expert.experttype');
+    Route::get('/contactUs', fn() => Inertia::render('Contact/ContactUs'))->name('Contact.ContactUs');
 });
 
 
