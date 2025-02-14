@@ -11,7 +11,7 @@ export default function Dashboard({ auth }) {
     const dummyBlogs = [
         {
             title: "Living with Diabetes: Daily Management Tips",
-            excerpt: "Discover effective strategies for managing your diabetes through proper monitoring and lifestyle adjustments.",
+            body: "Discover effective strategies for managing your diabetes through proper monitoring and lifestyle adjustments.",
             keyPoints: [
                 "Monitor blood sugar levels regularly",
                 "Stay active with moderate exercise",
@@ -20,7 +20,7 @@ export default function Dashboard({ auth }) {
         },
         {
             title: "Heart Health: Essential Tips for a Stronger Cardiovascular System",
-            excerpt: "Learn how to maintain a healthy heart through lifestyle changes and regular check-ups.",
+            body: "Learn how to maintain a healthy heart through lifestyle changes and regular check-ups.",
             keyPoints: [
                 "Reduce sodium intake to lower blood pressure",
                 "Engage in regular aerobic exercises",
@@ -29,7 +29,7 @@ export default function Dashboard({ auth }) {
         },
         {
             title: "The Importance of Mental Health in Chronic Illness",
-            excerpt: "Understanding the link between mental well-being and physical health for those with chronic conditions.",
+            body: "Understanding the link between mental well-being and physical health for those with chronic conditions.",
             keyPoints: [
                 "Practice mindfulness and stress management",
                 "Seek professional mental health support",

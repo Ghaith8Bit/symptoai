@@ -1,12 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
-export default function ContactDashboard({ auth }) {
-    const contacts = [
-        { id: 1, name: 'John Doe', email: 'johndoe@example.com' },
-        { id: 2, name: 'Jane Smith', email: 'janesmith@example.com' },
-        { id: 3, name: 'Michael Johnson', email: 'michaeljohnson@example.com' },
-    ];
+export default function ContactDashboard({ auth, contacts }) {
 
     return (
         <AuthenticatedLayout
