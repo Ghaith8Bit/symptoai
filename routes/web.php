@@ -60,6 +60,7 @@ Route::group(
         'controller' => ContactController::class
     ],
     function () {
+        Route::get('/', 'index')->name('index'); //TODO: Not User Type (Admin)
         Route::post('/', 'send')->name('send')->middleware('throttle:3,1');
     }
 );
