@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -39,8 +40,21 @@ Route::middleware('auth')->group(function () {
 
 Route::group(
     [
-        'prefix' => 'contact',
-        'as' => 'contact.',
+        'prefix' => 'doctors',
+        'as' => 'doctors.',
+        'controller' => DoctorController::class,
+        'middleware' => ['auth']
+    ],
+    function () {
+        Route::get('/', 'index')->name('index');
+        Route::patch('{doctor}/phone', 'phone')->name('phone');
+    }
+);
+
+Route::group(
+    [
+        'prefix' => 'contacts',
+        'as' => 'contacts.',
         'controller' => ContactController::class
     ],
     function () {
@@ -50,8 +64,8 @@ Route::group(
 
 Route::group(
     [
-        'prefix' => 'blog',
-        'as' => 'blog.',
+        'prefix' => 'blogs',
+        'as' => 'blogs.',
         'controller' => BlogController::class
     ],
     function () {

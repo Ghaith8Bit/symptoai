@@ -23,6 +23,7 @@ return new class extends Migration
             $table->decimal('latitude', 10, 7)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();
             $table->json('numbers')->nullable();
+            $table->integer('views')->unsigned()->default(0);
             $table->timestamps();
         });
     }

@@ -19,10 +19,7 @@ class Doctor extends Model
         'address_details',
         'latitude',
         'longitude',
-    ];
-
-    protected $hidden = [
-        'uuid'
+        'views',
     ];
 
     protected $casts = [
@@ -39,5 +36,11 @@ class Doctor extends Model
     public function accountType()
     {
         return $this->belongsTo(AccountType::class);
+    }
+
+    public function clicked()
+    {
+        $this->views += 1;
+        $this->save();
     }
 }

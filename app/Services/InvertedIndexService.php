@@ -6,6 +6,7 @@ use Closure;
 use RuntimeException;
 use App\Models\Doctor;
 use MessagePack\MessagePack;
+use Illuminate\Support\Facades\Cache;
 use TextAnalysis\Stemmers\PorterStemmer;
 use TextAnalysis\Tokenizers\GeneralTokenizer;
 
@@ -35,7 +36,7 @@ class InvertedIndexService
     }
 
     /**
-     * Static method to load the index from a file.
+     * method to load and cache the index from a file.
      */
     public function loadIndex(): void
     {
@@ -45,6 +46,22 @@ class InvertedIndexService
             throw new RuntimeException("Index file not found: {$path}");
         }
 
+        // Attempt to load the index from cache
+        $this->index = Cache::remember('inverted_index', 36000, function () use ($path) {
+            $content = file_get_contents($path);
+
+            if ($this->config['gzip_compression'] ?? false) {
+                $content = gzdecode($content);
+            }
+
+            $data = $this->config['serialization'] === 'msgpack'
+                ? MessagePack::unpack($content)
+                : unserialize($content);
+
+            return $data['index'];
+        });
+
+        // Load docData and idf from the file (not cached)
         $content = file_get_contents($path);
 
         if ($this->config['gzip_compression'] ?? false) {
@@ -55,8 +72,6 @@ class InvertedIndexService
             ? MessagePack::unpack($content)
             : unserialize($content);
 
-        // Load data into the instance
-        $this->index = $data['index'];
         $this->docData = $data['docData'];
         $this->idf = $data['idf'];
     }
@@ -185,6 +200,7 @@ class InvertedIndexService
     public function search(string $query, int $limit = null): array
     {
         $start = microtime(true);
+        $this->loadIndex();
         $tokens = $this->processText($query);
         if (empty($tokens)) return [];
 

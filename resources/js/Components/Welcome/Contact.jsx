@@ -13,7 +13,7 @@ export default function ContactSection() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessMessage('');
-        post(route('contact.send'), {
+        post(route('contacts.send'), {
             preserveScroll: true,
             onSuccess: () => {
                 setSuccessMessage('Your message has been sent successfully!');
