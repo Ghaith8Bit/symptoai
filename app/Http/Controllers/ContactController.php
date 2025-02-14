@@ -13,7 +13,7 @@ class ContactController extends Controller
     {
         $contacts = Contact::all();
 
-        Inertia::render('Contact/ContactUs', [
+        return Inertia::render('Contact/ContactUs', [
             'contacts' => $contacts
         ]);
     }
