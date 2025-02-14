@@ -8,6 +8,8 @@ import { Link } from '@inertiajs/react';
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
+    const userType = user.user_type;
+
     return (
         <div className="min-h-screen bg-gray-100">
             <nav className="bg-white border-b border-gray-100">
@@ -25,41 +27,48 @@ export default function Authenticated({ user, header, children }) {
                                     Dashboard
                                 </NavLink>
                             </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink >
-                                    Medical Record
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('ai.diagnosis')} active={route().current('ai.diagnosis')}>
-                                    Diagnosis
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('doctors.index')} active={route().current('doctors.index')}>
-                                    Find Doctors
-                                </NavLink>
-                            </div>
-                            {/* <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('expert.expertsystem')} active={route().current('expert.expertsystem')}>
-                                    Expert
-                                </NavLink>
-                            </div> */}
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('contacts.index')} active={route().current('contacts.index')}>
-                                    Contact
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('expert.experttype')} active={route().current('expert.experttype')}>
-                                    Expert
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('blogs.index')} active={route().current('blogs.index')}>
-                                    Blogs
-                                </NavLink>
-                            </div>
+
+                            {/* Conditionally show tabs based on userType */}
+                            {userType === 'user' && (
+                                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                    <NavLink href={route('ai.diagnosis')} active={route().current('ai.diagnosis')}>
+                                        Diagnosis
+                                    </NavLink>
+                                </div>
+                            )}
+
+                            {userType !== 'user' && (
+                                <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                    <NavLink href={route('blogs.index')} active={route().current('blogs.index')}>
+                                        Blogs
+                                    </NavLink>
+                                </div>
+                            )}
+
+                            {userType === 'user' && (
+                                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                    <NavLink href={route('doctors.index')} active={route().current('doctors.index')}>
+                                        Find Doctors
+                                    </NavLink>
+                                </div>
+                            )}
+
+                            {userType !== 'user' && (
+                                <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                    <NavLink href={route('contacts.index')} active={route().current('contacts.index')}>
+                                        Contact
+                                    </NavLink>
+                                </div>
+                            )}
+
+                            {userType === 'user' && (
+                                <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                    <NavLink href={route('expert.experttype')} active={route().current('expert.experttype')}>
+                                        Expert
+                                    </NavLink>
+                                </div>
+                            )}
+
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ms-6">

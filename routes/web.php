@@ -25,11 +25,9 @@ Route::get('/', HomeController::class)->name('welcome');
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard')->name('dashboard')->middleware('role.redirect');
 
-    Route::get('/medical-record', fn() => Inertia::render('Medical/Record'))->name('medical.record');
-    Route::get('/chatbot', fn() => Inertia::render('AI/Diagnosis'))->name('ai.diagnosis');
-    Route::get('/find-doctor', fn() => Inertia::render('Doctors/FindDoctor'))->name('doctors.find.doctor');
-    Route::get('/expertsystem', fn() => Inertia::render('Expert/ExpertSystem'))->name('expert.expertsystem');
-    Route::get('/expertType', fn() => Inertia::render('Expert/ExpertType'))->name('expert.experttype');
+    Route::get('/chatbot', fn() => Inertia::render('AI/Diagnosis'))->name('ai.diagnosis')->middleware('role:user');
+    Route::get('/expertsystem', fn() => Inertia::render('Expert/ExpertSystem'))->name('expert.expertsystem')->middleware('role:user');
+    Route::get('/expertType', fn() => Inertia::render('Expert/ExpertType'))->name('expert.experttype')->middleware('role:user');
 });
 
 
@@ -44,11 +42,10 @@ Route::group(
         'prefix' => 'doctors',
         'as' => 'doctors.',
         'controller' => DoctorController::class,
-        'middleware' => ['auth']
+        'middleware' => ['auth', 'role:user']
     ],
     function () {
         Route::get('/', 'index')->name('index');
-        Route::patch('{doctor}/phone', 'phone')->name('phone');
     }
 );
 
@@ -56,10 +53,11 @@ Route::group(
     [
         'prefix' => 'contacts',
         'as' => 'contacts.',
-        'controller' => ContactController::class
+        'controller' => ContactController::class,
+        'middleware' => ['auth']
     ],
     function () {
-        Route::get('/', 'index')->name('index'); //TODO: Not User Type (Admin)
+        Route::get('/', 'index')->name('index')->middleware('role:admin,editor');
         Route::post('/', 'send')->name('send')->middleware('throttle:3,1');
     }
 );
@@ -68,12 +66,13 @@ Route::group(
     [
         'prefix' => 'blogs',
         'as' => 'blogs.',
-        'controller' => BlogController::class
+        'controller' => BlogController::class,
+        'middleware' => ['auth']
     ],
     function () {
-        Route::get('/', 'index')->name('index'); //TODO: Not User Type (Admin)
-        Route::post('/', 'store')->name('store'); //TODO: Not User Type (Admin)
-        Route::delete('/{blog}', 'destroy')->name('destroy'); //TODO: Not User Type (Admin)
+        Route::get('/', 'index')->name('index')->middleware('role:admin,editor');
+        Route::post('/', 'store')->name('store')->middleware('role:admin,editor');
+        Route::delete('/{blog}', 'destroy')->name('destroy')->middleware('role:admin,editor');
     }
 );
 

@@ -20,6 +20,12 @@ class RedirectBasedOnRole
             return Inertia::render('Dashboard/Admin');
         }
 
-        return Inertia::render('Dashboard/User');
+        if (Gate::allows('access-editor-dashboard')) {
+            return Inertia::render('Dashboard/Editor');
+        }
+
+        if (Gate::allows('access-user-dashboard')) {
+            return Inertia::render('Dashboard/User');
+        }
     }
 }
