@@ -3,25 +3,8 @@ import { Head } from '@inertiajs/react';
 import CreateMedicalBlog from '@/Components/Blogs/CreateMedicalBlog';
 import MedicalBlogList from '@/Components/Blogs/MedicalBlogList';
 
-export default function Blogs({ auth }) {
-    // Dummy blog data
-    const dummyBlogs = [
-        {
-            title: "Living with Diabetes: Daily Management Tips",
-            body: "Discover effective strategies for managing your diabetes through proper monitoring and lifestyle adjustments.",
+export default function Blogs({ auth, blogs }) {
 
-        },
-        {
-            title: "Heart Health: Essential Tips for a Stronger Cardiovascular System",
-            body: "Learn how to maintain a healthy heart through lifestyle changes and regular check-ups.",
-
-        },
-        {
-            title: "The Importance of Mental Health in Chronic Illness",
-            body: "Understanding the link between mental well-being and physical health for those with chronic conditions.",
-
-        },
-    ];
 
     return (
         <AuthenticatedLayout user={auth.user}>
@@ -48,7 +31,7 @@ export default function Blogs({ auth }) {
                             </svg>
                             Latest Medical Blogs
                         </h2>
-                        <MedicalBlogList blogs={dummyBlogs} />
+                        <MedicalBlogList blogs={blogs} />
                     </div>
                 </div>
             </div>

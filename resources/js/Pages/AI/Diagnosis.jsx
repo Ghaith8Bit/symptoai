@@ -10,70 +10,138 @@ export default function DiagnosisAssistant({ auth }) {
     const [conversationFinished, setConversationFinished] = useState(false);
     const messagesEndRef = useRef(null);
 
+    const greetings = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening'];
+
+    const isGreeting = (message) => {
+        const cleanMessage = message.toLowerCase().replace(/[^a-z ]/g, '').trim();
+        return greetings.some(greet => cleanMessage === greet.toLowerCase());
+    };
+
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages, isTyping]);
 
     const handleSend = async (e) => {
         e.preventDefault();
-        // Do nothing if there's no input or conversation is already finished
         if (conversationFinished || !newMessage.trim()) return;
 
-        // Add the user's message
         const userMsg = { id: Date.now(), sender: 'user', text: newMessage.trim() };
         setMessages(prev => [...prev, userMsg]);
         setNewMessage('');
 
+        // Check for greeting
+        if (isGreeting(newMessage.trim())) {
+            const botMsg = {
+                id: Date.now() + 1,
+                sender: 'bot',
+                text: 'Hello! How can I assist you with your medical concerns today?'
+            };
+            setMessages(prev => [...prev, botMsg]);
+            setIsTyping(false);
+            return;
+        }
+
         setIsTyping(true);
 
-        // Simulate delay for bot response
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+            const response = await fetch('http://127.0.0.1:5000/diagnose', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ symptoms: newMessage.trim() }),
+            });
+            const data = await response.json();
+            const responseText = data.response;
+            const match = responseText.match(/\{"diagnosed_disease": ".*?"\}/);
 
-        // Bot's response message
-        const botMsg = {
-            id: Date.now() + 1,
-            sender: 'bot',
-            text: 'Analyzing your symptoms... Please wait.'
-        };
-        setIsTyping(false);
-        setMessages(prev => [...prev, botMsg]);
-
-        // Mark the conversation as finished so no further input is allowed
-        setConversationFinished(true);
+            if (match) {
+                const diagnosis = JSON.parse(match[0]);
+                const botMsg = {
+                    id: Date.now() + 1,
+                    sender: 'bot',
+                    text: `Based on your symptoms, the possible diagnosis is: ${diagnosis.diagnosed_disease}`
+                };
+                setMessages(prev => [...prev, botMsg]);
+            } else {
+                throw new Error('Invalid response format');
+            }
+        } catch (error) {
+            const errorMsg = {
+                id: Date.now() + 1,
+                sender: 'bot',
+                text: 'An error occurred while processing your request. Please try again.'
+            };
+            setMessages(prev => [...prev, errorMsg]);
+        } finally {
+            setIsTyping(false);
+            setConversationFinished(true);
+        }
     };
 
     const startChat = async () => {
         if (newMessage.trim()) {
-            // If an initial symptom is entered, send it immediately
             const userMsg = { id: Date.now(), sender: 'user', text: newMessage.trim() };
             setMessages([userMsg]);
             setNewMessage('');
             setChatStarted(true);
+
+            // Check for greeting
+            if (isGreeting(newMessage.trim())) {
+                const botMsg = {
+                    id: Date.now() + 1,
+                    sender: 'bot',
+                    text: 'Hello! Please describe your symptoms so I can assist you.'
+                };
+                setMessages(prev => [...prev, botMsg]);
+                setIsTyping(false);
+                return;
+            }
+
             setIsTyping(true);
 
-            // Simulate delay for the bot response
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            try {
+                const response = await fetch('http://127.0.0.1:5000/diagnose', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ symptoms: newMessage.trim() }),
+                });
+                const data = await response.json();
+                const responseText = data.response;
+                const match = responseText.match(/\{"diagnosed_disease": ".*?"\}/);
 
-            const botMsg = {
-                id: Date.now() + 1,
-                sender: 'bot',
-                text: 'Analyzing your symptoms... Please wait.'
-            };
-            setIsTyping(false);
-            setMessages(prev => [...prev, botMsg]);
-            setConversationFinished(true);
+                if (match) {
+                    const diagnosis = JSON.parse(match[0]);
+                    const diagnosisMsg = {
+                        id: Date.now() + 1,
+                        sender: 'bot',
+                        text: `Diagnosis: ${diagnosis.diagnosed_disease}`
+                    };
+                    setMessages(prev => [...prev, diagnosisMsg]);
+                } else {
+                    throw new Error('Invalid response format');
+                }
+            } catch (error) {
+                const errorMsg = {
+                    id: Date.now() + 1,
+                    sender: 'bot',
+                    text: 'Error processing your request.'
+                };
+                setMessages(prev => [...prev, errorMsg]);
+            } finally {
+                setIsTyping(false);
+                setConversationFinished(true);
+            }
         } else {
-            // Start chat interface without sending a message
             setChatStarted(true);
         }
     };
 
-    // Resets the conversation to allow another symptom submission
+
     const resetChat = () => {
         setMessages([]);
         setNewMessage('');
         setConversationFinished(false);
     };
+
 
     return (
         <AuthenticatedLayout user={auth.user}>

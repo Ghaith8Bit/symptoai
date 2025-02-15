@@ -1,21 +1,21 @@
 import { Head } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { motion } from 'framer-motion';
-import { FaHeadSideVirus, FaLungs, FaTooth, FaBandAid, FaHeartbeat, FaBone } from 'react-icons/fa';
+import { FaBrain, FaEye, FaWalking, FaHeadSideVirus, FaLungs, FaUserMd, FaStethoscope, FaHeart } from 'react-icons/fa';
+import { GiRibcage } from 'react-icons/gi';
 
 const ExpertType = ({ auth }) => {
     const symptoms = [
-        { id: 1, name: 'الصداع', icon: <FaHeadSideVirus />, color: 'from-blue-500 to-purple-600' },
-        { id: 2, name: 'ألم الحنجرة', icon: <FaLungs />, color: 'from-rose-500 to-pink-600' },
-        { id: 3, name: 'ألم الأسنان', icon: <FaTooth />, color: 'from-cyan-500 to-blue-600' },
-        { id: 4, name: 'إصابات الجلد', icon: <FaBandAid />, color: 'from-green-500 to-emerald-600' },
-        { id: 5, name: 'ألم الصدر', icon: <FaHeartbeat />, color: 'from-red-500 to-rose-600' },
-        { id: 6, name: 'ألم المفاصل', icon: <FaBone />, color: 'from-amber-500 to-orange-600' },
+        { id: 1, name: 'Chest', icon: <GiRibcage />, color: 'from-blue-500 to-purple-600' },
+        { id: 2, name: 'Eye', icon: <FaEye />, color: 'from-rose-500 to-pink-600' },
+        { id: 3, name: 'Limbs', icon: <FaWalking />, color: 'from-cyan-500 to-blue-600' },
+        { id: 4, name: 'Head', icon: <FaBrain />, color: 'from-green-500 to-emerald-600' },
+        { id: 5, name: 'Respiratory', icon: <FaLungs />, color: 'from-red-500 to-rose-600' },
+        { id: 6, name: 'Stomach', icon: <FaStethoscope />, color: 'from-teal-500 to-green-600' },
+        { id: 7, name: 'Heart', icon: <FaHeart />, color: 'from-red-600 to-red-800' },
+        { id: 8, name: 'Skin', icon: <FaUserMd />, color: 'from-red-600 to-red-800' },
     ];
 
-    const handleCardClick = (symptom) => {
-        window.location.href = `/expertsystem`;
-    };
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -39,7 +39,7 @@ const ExpertType = ({ auth }) => {
 
     return (
         <AuthenticatedLayout user={auth.user}>
-            <Head title="النظام الذبي للتشخيص الطبي" />
+            <Head title="   patient condition expert system " />
 
             <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
                 <motion.div
@@ -49,7 +49,7 @@ const ExpertType = ({ auth }) => {
                     className="max-w-7xl mx-auto"
                 >
                     <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
-                        اختر نوع العرض الطبي
+                        shoose the expert type
                     </h1>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
